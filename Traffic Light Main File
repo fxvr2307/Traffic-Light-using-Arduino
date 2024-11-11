@@ -1,0 +1,89 @@
+
+// Traffic light set up
+const int LED_red = 10;
+const int LED_yellow = 9;
+const int LED_green = 8;
+
+//Pedestrian cross set up
+const int LED_white = 7;
+const int button = 2;
+const int buzzer = 3;
+
+//Boolean variable
+bool button_state;
+//Set up function
+void setup()
+{
+  //Outputs Traffic Light
+  
+  //pinMode(parameter 1 = pin number, parameter 2 = Input/Output 
+  pinMode(LED_red, OUTPUT);
+  pinMode(LED_yellow, OUTPUT);
+  pinMode(LED_green, OUTPUT);
+  pinMode(LED_white, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  
+  //Inputs of the traffic light
+  pinMode(button, OUTPUT);
+}
+
+void walkingMode()
+{
+ 	
+  //digitalWrite(parameter1= pin number, parameter2= state HIGH/LOW
+  digitalWrite(LED_green, HIGH);//turn on the green light
+  delay(4000); //give it 4 seconds to be on
+  digitalWrite(LED_green, LOW); //turn it off
+
+  digitalWrite(LED_yellow, HIGH); //turn on the yellow light 
+  delay(1000);//much faster yellow light, only 1 second
+  digitalWrite(LED_yellow, LOW);//turn it off
+ 
+  
+  digitalWrite(LED_red, HIGH);//turn on the red ligh
+  digitalWrite(LED_white, HIGH);// turn on crossing signal
+  digitalWrite(buzzer, HIGH);//turn on buzzer to indicate crossing
+  
+  delay(3000);//make this last 3 seconds 
+  
+  //turn off all elements for crossing
+  digitalWrite(LED_red, LOW);
+  digitalWrite(LED_white, LOW);
+  digitalWrite(buzzer, LOW);
+	
+}
+
+
+void trafficLight()
+{
+  //green light set-up	
+  digitalWrite(LED_green, HIGH);
+  delay(4000);
+  digitalWrite(LED_green, LOW);
+
+  //yellow light set-up
+  digitalWrite(LED_yellow, HIGH); 
+  delay(1000);
+  digitalWrite(LED_yellow, LOW);
+ 	
+  //red light set-up 
+  digitalWrite(LED_red, HIGH);
+  delay(3000);  
+  digitalWrite(LED_red, LOW);
+}
+
+
+void loop()
+{
+  button_state = digitalRead(button);
+  
+
+  if(button_state)
+  {
+  	delay(15);
+    if(button_state){walkingMode();}
+  }
+  
+  else{trafficLight();}
+ 
+}
